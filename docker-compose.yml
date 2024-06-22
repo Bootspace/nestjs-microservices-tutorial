@@ -22,13 +22,16 @@ services:
     image: nats
     ports:
       - 4222:4222
-  mysql_db:
-    image: mysql
+  postgres_db:
+    image: postgres:latest
     ports:
-      - "3307:3307"
+      - "5433:5432"
     environment:
-      - MYSQL_ROOT_PASSWORD= root_password_123
-      - MYSQL_DATABASE= nestjs_db
-      - MYSQL_USER= testuser
-      - MYSQL_PASSWORD= testuser123
-      - MYSQL_TCP_PORT= 3307
+      - POSTGRES_DB=nestjs_db
+      - POSTGRES_USER=testuser
+      - POSTGRES_PASSWORD=testuser123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
